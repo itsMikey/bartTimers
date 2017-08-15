@@ -1,0 +1,4 @@
+app:
+  isLocal: false
+  isProd: false
+  isTest: false
