@@ -1,3 +1,20 @@
-node_modules/
-yarn.lock
-dist/
+# compiled output
+dist
+tmp
+
+# IDEs and editors
+.idea
+.project
+.classpath
+*.launch
+.settings
+
+# Ignore Mac DS_Store files
+.DS_Store
+.gradle
+
+
+# Logs
+logs
+*.log
+npm-debug.log
