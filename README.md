@@ -23,7 +23,7 @@ To run unit tests: <br />
  After you've compiled the build, bring it up with docker: <br />
  ``` docker-compose -f docker-compose-development.yml up```
 
-### Stack
+### Built With
 * Backend: 
   * Node.js
   * Express
@@ -38,7 +38,6 @@ To run unit tests: <br />
     * Mongo
     * Nginx
 
-
 ### Screenshots
 Dashboard Section
 ![Dashboard](/git/screenshots/dashboard.png?raw=true "Dashboard image")
@@ -46,5 +45,8 @@ Dashboard Section
 Register/Login Tabs
 ![Register/Login](/git/screenshots/register-login.png?raw=true "register and login image")
 <br />
-Web Notification
+Web Notification <br />
 ![Web Notification](/git/screenshots/react-notification.png?raw=true "web notification")
+
+### License
+This project is licensed under the MIT License - see the [LICENSE](/LICENSE) for details
