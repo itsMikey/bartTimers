@@ -2,3 +2,11 @@ app:
   isLocal: false
   isProd: false
   isTest: false
+  isDev: false
+  site: http://bart-timers.xyz
+bart:
+  apiKey: YOUR_API_KEY
+  baseUrl: http://api.bart.gov/api/
+dal:
+  mongo:
+    host: mongodb://mongo:27017/web

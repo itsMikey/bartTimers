@@ -1,2 +1,8 @@
 app:
   isLocal: true
+workerEndPoint: http://worker:8082
+dal:
+  mongo:
+    host: mongodb://mongo:27017/web
+    username: adminMikey
+    password: .GyMjJ}UR/vNQ22y

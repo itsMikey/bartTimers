@@ -1,0 +1,89 @@
+version: '2.1'
+
+services:
+  web:
+    restart: always
+    build:
+     context: ./
+     dockerfile: docker/nginx/DockerFile-development
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - './dist/server:/dist/server'
+      - './dist/worker:/dist/worker'
+    networks:
+      captain:
+        ipv4_address: 10.5.0.3
+    links:
+      - app
+      - worker
+    depends_on:
+     - app
+     - worker
+     - mongo
+  app:
+    container_name: app
+    build:
+     context: ./
+     dockerfile: docker/app/DockerFile-development
+    working_dir: /dist/server
+    depends_on:
+      - mongo
+      - worker
+    ports:
+      - "8081:8081"
+    networks:
+      captain:
+        ipv4_address: 10.5.0.4
+    volumes:
+        - './dist/server:/dist/server'
+        - './package.json:/dist/server/package.json'
+    environment:
+     - MONGODB_HOST=mongo
+     - NODE_ENV=local
+    links:
+     - worker
+  worker:
+     container_name: worker
+     build:
+      context: ./
+      dockerfile: docker/app/DockerFile-development
+     working_dir: /dist/worker
+     depends_on:
+       - mongo
+     ports:
+       - "8082:8082"
+     networks:
+       captain:
+         ipv4_address: 10.5.0.5
+     volumes:
+         - './dist/worker:/dist/worker'
+         - './package.json:/dist/worker/package.json'
+     environment:
+      - MONGODB_HOST=mongo
+      - NODE_ENV=local
+      - PORT=8082
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+#    environment:
+#     - MONGO_INITDB_ROOT_USERNAME=adminMikey
+#     - MONGO_INITDB_ROOT_PASSWORD=.GyMjJ}UR/vNQ22y
+    ports:
+     - "27017:27017"
+    volumes:
+     - mongodata:/data/db
+    networks:
+      captain:
+        ipv4_address: 10.5.0.6
+volumes:
+  mongodata:
+
+networks:
+  captain:
+    driver: bridge
+    ipam:
+     config:
+       - subnet: 10.5.0.0/16
+         gateway: 10.5.0.1

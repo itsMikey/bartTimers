@@ -26,7 +26,8 @@
     "no-shadowed-variable": false,
     "no-unused-expression": false,
     "no-invalid-template-strings": false,
-    "prefer-const": false
+    "prefer-const": false,
+    "no-implicit-dependencies": false
   },
   "jsRules": {
     "curly": true

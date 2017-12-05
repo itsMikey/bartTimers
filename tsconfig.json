@@ -1,28 +1,33 @@
 {
-    "compilerOptions": {
+  "compilerOptions": {
     "target": "es6",
-        "module": "commonjs",
-        "lib": ["dom","es6"],
-        "baseUrl": ".",
-        "moduleResolution": "node",
-        "emitDecoratorMetadata": true,
-        "experimentalDecorators": true,
-        "sourceMap": false,
-        "noEmitHelpers": false,
-        "outDir": "dist",
-        "removeComments": true,
-        "allowSyntheticDefaultImports": true
-},
-    "include": [
-    "src/**/*.ts"
-],
-    "awesomeTypescriptLoaderOptions": {
+    "module": "commonjs",
+    "lib": [
+      "dom",
+      "es6"
+    ],
+    "baseUrl": ".",
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "sourceMap": false,
+    "noEmitHelpers": false,
+    "outDir": "dist",
+    "removeComments": true,
+    "allowSyntheticDefaultImports": true,
+    "jsx": "react"
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.tsx"
+  ],
+  "awesomeTypescriptLoaderOptions": {
     "forkChecker": true,
-        "useWebpackText": true
-},
-    "compileOnSave": false,
-    "buildOnSave": false,
-    "atom": {
+    "useWebpackText": true
+  },
+  "compileOnSave": false,
+  "buildOnSave": false,
+  "atom": {
     "rewriteTsconfig": false
-}
+  }
 }
