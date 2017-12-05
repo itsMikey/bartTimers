@@ -1,0 +1,107 @@
+resolver 127.0.0.1;
+
+upstream app {
+    server app:8081;
+    keepalive 256;
+}
+
+upstream worker {
+    server worker:8082;
+    keepalive 256;
+}
+
+server {
+    listen 80;
+    server_name bart-timers.xyz;
+
+    gzip on;
+    gzip_comp_level 4;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    error_page 403 /error/403.html;
+    error_page 404 /error/404.html;
+    error_page 405 /error/405.html;
+    error_page 500 501 502 503 504 /error/5xx.html;
+
+    index index.html;
+    root /var/dist/server/static;
+
+    location ^~ /error/ {
+        internal;
+    }
+
+    location ~ ^/(images/|videos/|vendor/) {
+        access_log off;
+        expires 1d;
+        try_files $uri 404;
+    }
+
+    location ~* \.(js|css|png|jpg|jpeg|gif|ico)$ {
+      proxy_pass http://app;
+      expires 1d;
+    }
+
+
+    location / {
+        proxy_pass http://app;
+        proxy_set_header   Connection "";
+        proxy_http_version 1.1;
+        proxy_set_header        Host            $host;
+        proxy_set_header        X-Real-IP       $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
+        proxy_next_upstream error;
+        # Add HTTP Strict Transport Security for good measure.
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains;";
+    }
+
+}
+
+server {
+    listen 80;
+    server_name worker.bart-timers.xyz;
+
+    gzip on;
+    gzip_comp_level 4;
+    gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+    error_page 403 /error/403.html;
+    error_page 404 /error/404.html;
+    error_page 405 /error/405.html;
+    error_page 500 501 502 503 504 /error/5xx.html;
+
+    index index.html;
+    root /var/dist/worker;
+
+    location ^~ /error/ {
+        internal;
+    }
+
+    location ~ ^/(images/|videos/|vendor/) {
+        access_log off;
+        expires 1d;
+        try_files $uri 404;
+    }
+
+
+    location ~ ^/(js/|css/) {
+        access_log off;
+        expires 1s;
+        try_files $uri 404;
+    }
+
+    location / {
+        proxy_pass http://worker;
+        proxy_set_header   Connection "";
+        proxy_http_version 1.1;
+        proxy_set_header        Host            $host;
+        proxy_set_header        X-Real-IP       $remote_addr;
+        proxy_set_header        X-Forwarded-For $proxy_add_x_forwarded_for;
+        proxy_redirect off;
+        proxy_next_upstream error;
+        # Add HTTP Strict Transport Security for good measure.
+        add_header Strict-Transport-Security "max-age=31536000; includeSubDomains;";
+    }
+
+
+}

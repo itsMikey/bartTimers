@@ -1,0 +1,17 @@
+FROM node:latest
+MAINTAINER Mikey Aburamadan
+
+COPY dist /dist
+RUN cd /dist
+ADD package.json /
+RUN npm cache verify
+RUN npm install nodemon -g
+RUN npm install yarn -g
+RUN yarn
+WORKDIR /dist
+
+ENV NODE_ENV local
+
+EXPOSE 8081 8082
+CMD ["npm", "start"]
+

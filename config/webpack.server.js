@@ -25,7 +25,8 @@ const backendConfig = {
             'process.env.APP_CONFIG': JSON.stringify(APP_CONFIG)
         }),
         new CopyWebpackPlugin([
-            {from: '../config/eb/bin/www', to: './bin/[name]', flatten: true }
+            {from: '../config/eb/bin/www', to: './bin/[name]', flatten: true},
+            {from: '../src/server/views', to: './views/[name].[ext]'}
         ])
     ],
     externals: [nodeExternals()],

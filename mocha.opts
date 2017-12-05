@@ -1,0 +1,5 @@
+--colors
+--ui bdd
+--require ts-node/register
+--reporter list
+--watch-extensions ts

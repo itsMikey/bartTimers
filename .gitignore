@@ -8,6 +8,7 @@ tmp
 .classpath
 *.launch
 .settings
+.gitignore
 
 # Ignore Mac DS_Store files
 .DS_Store
@@ -18,3 +19,9 @@ tmp
 logs
 *.log
 npm-debug.log
+
+# env
+local.yml
+test.yml
+
+node_modules
