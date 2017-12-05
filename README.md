@@ -1,8 +1,8 @@
 # bartTimers
-bartTimers was created so you could be a part time commuter instead of a full time one. You set your home/destination stations and the time you'd like to arrive to each one. It will then alert you with web notifications when your train is near.
+bartTimers was created so you could be a part time commuter instead of being full time on the wrong trains at the wrong time. You set your home/destination stations and the time you'd like to arrive to each one. It will then alert you with web notifications when your train is near.
 
 ## Purpose
-We're usually on the computer at work so I thought it would be convenient to have an app to remind us that the BART train was near. Another one of my motivations for creating this was to get familiar with Reactjs and Docker.
+We're usually on the computer at work so I thought it would be convenient to have an app to remind us that the BART train is near. Another one of my motivations for creating this was to get familiar with Reactjs and Docker.
 
 
 ### Prerequisites
