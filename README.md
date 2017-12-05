@@ -42,3 +42,9 @@ To run unit tests: <br />
 ### Screenshots
 Dashboard Section
 ![Dashboard](/git/screenshots/dashboard.png?raw=true "Dashboard image")
+<br />
+Register/Login Tabs
+![Register/Login](/git/screenshots/register-login.png?raw=true "register and login image")
+<br />
+Web Notification
+![Web Notification](/git/screenshots/react-notification.png?raw=true "web notification")
