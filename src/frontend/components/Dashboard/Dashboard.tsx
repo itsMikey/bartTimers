@@ -169,8 +169,7 @@ class Dashboard extends React.Component<any, any> {
                                                 <CardContent>
                                                     <p>
                                                         Origin Train Departure: {route.originDepartureTime} <br/>
-                                                        Estimated Destination Arrival:
-                                                        <b>{route.destinationArrivalTime}</b>
+                                                        Estimated Destination Arrival: <b>{route.destinationArrivalTime}</b>
                                                         <br/>
                                                         Trip Time: {route.tripLength} <br/>
                                                         Fare: ${route.fare} <br/>
