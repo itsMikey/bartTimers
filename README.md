@@ -37,3 +37,8 @@ To run unit tests: <br />
     * Worker (Node.js)
     * Mongo
     * Nginx
+
+
+### Screenshots
+Dashboard Section
+![Dashboard](/git/screenshots/dashboard.png?raw=true "Dashboard image")
