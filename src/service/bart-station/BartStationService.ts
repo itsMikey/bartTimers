@@ -30,27 +30,23 @@ export class BartStationService implements IBartStationService {
 
     // populate DB (not user)
     public addAllStationsToDb(stations: IApiBartStation[]): Promise<string> {
-        return BartStation.addStations(stations)
-            .then((stationRes) => {
-                console.log(stationRes);
-                return Promise.resolve(stationRes);
-            })
-            .catch((err) => {
-                console.log(err);
-                return Promise.reject(err);
-            });
+        return BartStation.addStations(stations);
     }
 
     // get routes for user's defined settings
     public routePlanner(route: IPlanRoute) {
-        const getRouteUrl: string = `${this.stationUrl}sched.aspx?cmd=arrive&orig=${route.data.orig}&dest=${route.data.dest}&time=${route.data.time}&b=2&key=${this.appConfigService.getAppConfig().bart.apiKey}&json=y`;
+        const getRouteUrl: string = `${this.stationUrl}sched.aspx?cmd=arrive&orig=${route.data.orig}&dest=${route.data.dest}&time=${route.data.time}&b=0&key=${this.appConfigService.getAppConfig().bart.apiKey}&json=y`;
         let clientFacingRoutes = {
             routes: []
         };
         return this.httpClient.doGet(getRouteUrl, {})
             .then((routeResponse) => {
+                if (routeResponse.root.message.error) {
+                    return Promise.reject(routeResponse.root.message.error);
+                }
                 const trip = routeResponse.root.schedule.request.trip;
                 let findBartStationPromiseArray = [];
+                // find stations in our db for each route
                 for (let i = 0, j = trip.length; i < j; i++) {
                     findBartStationPromiseArray.push(
                     new Promise((resolve, reject) => {
@@ -59,6 +55,7 @@ export class BartStationService implements IBartStationService {
                             BartStation.findOne({"abbr": trip[i][`@destination`]})
                         ])
                             .then((foundStations) => {
+                                // return IPlanRoute for each route
                                 return resolve(clientFacingRoutes.routes.push({
                                     origin: foundStations[0],
                                     originDepartureTime: trip[i]["@origTimeMin"],
@@ -75,18 +72,13 @@ export class BartStationService implements IBartStationService {
                     }));
                 }
                 return Promise.all(findBartStationPromiseArray)
-                    .then((res) => {
-                        console.log(res);
-                        console.log(clientFacingRoutes);
-                        return Promise.resolve(clientFacingRoutes)
+                    .then(() => {
+                        return Promise.resolve(clientFacingRoutes);
                     })
                     .catch((err) => {
                         console.log(err);
                         return Promise.reject(err);
                     });
-                // return Promise.resolve({
-                //     routes: routeResponse.root.schedule.request.trip
-                // });
             })
             .catch((err) => {
                 console.log(err);
@@ -124,13 +116,6 @@ export class BartStationService implements IBartStationService {
 
     // get stations from mongo
     public getAllStations(): Promise<IBartStation[]> {
-        return BartStation.getAllStations()
-            .then((stations) => {
-                return stations;
-            })
-            .catch((err) => {
-                console.log(err);
-                return Promise.reject(err);
-            });
+        return BartStation.getAllStations();
     }
 }

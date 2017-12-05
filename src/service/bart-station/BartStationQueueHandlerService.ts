@@ -13,7 +13,7 @@ export class BartStationQueueHandlerService extends BaseQueueHandlerService impl
     public constructor(@inject(TYPES.BartStationService) private bartStationService: BartStationService) {
         super();
     }
-
+    // handle queue post (worker)
     public handleMessage(message: IQueueRequest): Promise<boolean> {
         let handler: (queueMessage: IQueueRequest) => Promise<boolean>;
         console.log("Handling Message: " + JSON.stringify(message));

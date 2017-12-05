@@ -1,3 +1,4 @@
+// component to update a User's bart settings (stations, arrival time, etc.
 import * as React from "react";
 import {bartMethods} from "./BartMethods";
 import {connect} from "react-redux";
@@ -6,12 +7,13 @@ import {userMethods} from "../User/UserMethods";
 import {withRouter} from "react-router";
 import {USER_ACTIONS} from "../../state/actions/UserActions";
 import {BART_ACTIONS} from "../../state/actions/BartActions";
+import {IState} from "../../../common/constant/interfaces/state/IState";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IState) => ({
     bart: state.bart,
     user: null,
     ...state
-});
+} as IState);
 
 const mapDispatchToProps = (dispatch) => ({
     getStations: (payload) =>
@@ -28,11 +30,11 @@ class BartUserSettings extends React.Component<any, any> {
     constructor() {
         super();
         // get intervals of available bart times
-        const startTime = new Date();
-        const endTime = new Date();
+        const startTime: Date = new Date();
+        const endTime: Date = new Date();
         startTime.setHours(4, 0);
         endTime.setHours(24, 0);
-        this.dateInterval = dateIntervals(startTime, endTime);
+        this.dateInterval = dateIntervals(startTime, endTime) as string[];
 
         // set base state to Embarcadero & Fremont
         this.state = {

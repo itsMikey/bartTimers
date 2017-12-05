@@ -19,10 +19,6 @@ export class MongooseService {
     constructor(@inject(TYPES.AppConfigService) private appConfigService: AppConfigService) {
         if (!MongooseService.instance) {
             mongoose.connect(appConfigService.getAppConfig().dal.mongo.host, {
-                // auth: {
-                //     user: appConfigService.getAppConfig().dal.mongo.username,
-                //     password: appConfigService.getAppConfig().dal.mongo.password
-                // }c
             }, (err) => {
                 if (err) {
                     console.log(err);

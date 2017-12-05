@@ -11,13 +11,15 @@ import {ERROR_CODES} from "../../common/constant/error-codes";
 import {IPlanRoute} from "../../common/constant/interfaces/bart/Routes/IPlanRoute";
 import {IClientFacingRoutesResponse} from "../../common/api/route/IClientFacingRoute";
 import {IBartStationRes} from "../../common/api/bart-station/IBartStationRes";
-import {IUser} from "src/models/User/User";
-import {IUserRes} from "../../common/api/user/IUserRes";
+import {IUser} from "../../models/User/User";
 
 export interface IPublicApiController {
     login(req, res, next);
+
     routePlanner(req): Promise<IClientFacingRoutesResponse>;
+
     getAllPublicStations(): Promise<IBartStationRes>;
+
     register(req, res?): Promise<any>;
 }
 
@@ -35,6 +37,7 @@ export function PublicApiControllerFactory(container: Container) {
                     @inject(TYPES.BartStationService) private bartStationService: BartStationService) {
             self = this;
         }
+
 
         @httpGet("/get-stations")
         public getAllPublicStations(): Promise<IBartStationRes> {
@@ -55,7 +58,6 @@ export function PublicApiControllerFactory(container: Container) {
         @httpGet("/plan-route/:dest/:orig/:time")
         public routePlanner(req): Promise<IClientFacingRoutesResponse> {
             const routePlan: IPlanRoute = this.apiHandlerService.extractParamsApiRequest(req);
-
             return this.bartStationService.routePlanner(routePlan)
                 .then((routes) => {
                     return this.apiHandlerService.returnData(routes) as IClientFacingRoutesResponse;
@@ -74,7 +76,7 @@ export function PublicApiControllerFactory(container: Container) {
                     return res.send(self.apiHandlerService.returnErr(ERROR_CODES.UNEXPECTED_ERROR));
                 } else if (!user) {
                     return res.send(self.apiHandlerService.returnErr(ERROR_CODES.LOGIN.INCORRECT_CREDENTIALS));
-                }  else {
+                } else {
                     // have to manually log in user with custom callback
                     return new Promise((resolve, reject) => {
                         req.login((user), (err) => {
@@ -116,7 +118,7 @@ export function PublicApiControllerFactory(container: Container) {
                             destinationArrival: null,
                             destinationStation: null
                         }
-                    }
+                    } as IUser
                 );
             } else {
                 return this.userService.getUserForClient(req.user._id)

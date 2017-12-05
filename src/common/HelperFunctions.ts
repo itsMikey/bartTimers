@@ -2,9 +2,9 @@
 import moment = require("moment");
 
 // return every 15 minutes between two times
-export function dateIntervals(startString, endString) {
-    let start = moment(startString, "YYYY-MM-DD hh:mma");
-    let end = moment(endString, "YYYY-MM-DD hh:mma");
+export function dateIntervals(startDate: Date, endDate: Date): string[] {
+    let start = moment(startDate, "YYYY-MM-DD hh:mma");
+    let end = moment(endDate, "YYYY-MM-DD hh:mma");
 
     // round starting minutes up to nearest 15 (12 --> 15, 17 --> 30)
     // note that 59 will round up to 60, and moment.js handles that correctly

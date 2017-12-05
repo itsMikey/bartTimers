@@ -11,6 +11,7 @@ import {IApiAddUserStations} from "../../../common/constant/interfaces/bart/Stat
 import {BartStation, IBartStation} from "../../../models/BartStation/BartStation";
 import {mockApiBartStations} from "../../../../test-helpers/BartObjectsMocker";
 import {SUCCESS_CODES} from "../../../common/constant/success-codes";
+import {IStations} from "../../../common/constant/interfaces/bart/Station/IStations";
 
 describe("User Service", () => {
     const testUserReq = userRegistrationMocker();
@@ -49,7 +50,7 @@ describe("User Service", () => {
                                                     homeStationArrival: "05:00pm",
                                                     destinationArrival: "08:00am",
                                                     destinationStation: globalStations[5]
-                                                }
+                                                } as IStations
                                             }
                                         };
                                         done();
@@ -130,7 +131,6 @@ describe("User Service", () => {
     it("should get user facing client object", (done) => {
         userService.getUserForClient(globalUser._id)
             .then((clientUserFacingObj) => {
-                console.log(clientUserFacingObj);
                 expect(clientUserFacingObj.firstName, " incorrect firstName").to.eql(globalUser.firstName);
                 expect(clientUserFacingObj.lastName, " incorrect lastName").to.eql(globalUser.lastName);
                 expect(clientUserFacingObj.email, " incorrect email").to.eql(globalUser.email);

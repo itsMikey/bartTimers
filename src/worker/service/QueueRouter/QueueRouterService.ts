@@ -15,7 +15,7 @@ export class QueueRouterService implements IQueueRouterService {
 
     constructor(@inject(TYPES.BartStationQueueHandlerService) private bartStationQueueHandlerService: BartStationQueueHandlerService) {
     }
-
+    // route queue requests to correct QueueHandlerService
     public route(message: IQueueRequest): Promise<boolean> {
         let handlerService: IQueueHandlerService;
         console.log("Routing Message: " + JSON.stringify(message));

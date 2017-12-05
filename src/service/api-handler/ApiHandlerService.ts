@@ -21,6 +21,7 @@ export class ApiHandlerService {
         };
     }
 
+    // passport authenticated request
     public extractAuthenticatedRequest(req: any) {
         const user = JSON.parse(JSON.stringify(req.session)).passport.user;
         console.log(user);

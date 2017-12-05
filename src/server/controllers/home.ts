@@ -32,13 +32,13 @@ export function HomeControllerFactory(container: Container) {
             this.title = "BartTimers";
             this.scripts = [];
 
-
+            // any keys that need to be reflected in frontend go in api (index.pug injection)
             this.options = {
                 "message": "Welcome to BartTimers",
                 "keywords": "bart, commute, timeWaster",
                 "description": "Help you beat that commute time",
                 "api": {
-                    "val1": "test"
+                    "key": "frontend"
                 }
             };
 

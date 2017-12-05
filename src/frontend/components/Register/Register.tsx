@@ -1,11 +1,12 @@
+// component to register user
 import * as React from "react";
 import {isValidEmail, isValidPassword} from "../../../common/HelperFunctions";
 import {ERROR_CODES} from "../../../common/constant/error-codes";
 import {userMethods} from "../User/UserMethods";
 import {SUCCESS_CODES} from "../../../common/constant/success-codes";
 import {connect} from "react-redux";
-import WebNotification from "../../WebNotification/WebNotification";
 import {USER_ACTIONS} from "../../state/actions/UserActions";
+import {IUser} from "../../../models/User/User";
 
 const mapStateToProps = (state) => ({
     user: {
@@ -18,7 +19,7 @@ const mapStateToProps = (state) => ({
             destinationStation: null
         },
         ...state.user
-    }
+    } as IUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -51,6 +52,7 @@ class Register extends React.Component<any, any> {
             this.handleMessage(ERROR_CODES.REGISTER.PASSWORD_INVALID);
         } else {
             this.handleMessage("");
+            // upon registration, populate user ( will be redirected)
             userMethods.registerUser({data: {...this.state.registerReq}})
                 .then((res) => {
                     if (res.code === 200) {
@@ -88,11 +90,6 @@ class Register extends React.Component<any, any> {
     render() {
         return (
             <div className="columns is-centered">
-                <WebNotification
-                    tag={"homie"}
-                    body={"yo"}
-                    title={"cool"}
-                />
                 <div className="column">
                     <br/>
                     <form onSubmit={this.handleFormSubmit}>

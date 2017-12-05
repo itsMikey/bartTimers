@@ -29,13 +29,7 @@ export class UserService implements IUserService {
     }
 
     public registerUser(registerReq: IRegisterApiReq): Promise<IUser> {
-        return User.register(registerReq)
-            .then((res) => {
-                return Promise.resolve(res);
-            })
-            .catch((err) => {
-                return Promise.reject(err);
-            });
+        return User.register(registerReq);
     }
 
     // client facing user object

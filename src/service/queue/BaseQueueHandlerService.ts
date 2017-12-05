@@ -3,7 +3,7 @@ import {injectable} from "inversify";
 import {IQueueRequest} from "../../common/constant/interfaces/queue/IQueueRequest";
 @injectable()
 export class BaseQueueHandlerService {
-
+    // handle the queue requests
     public executeHandler(handler: (message: IQueueRequest, data?: any) => Promise<any>, message: IQueueRequest): Promise<any> {
         return handler(message)
             .then((result) => {

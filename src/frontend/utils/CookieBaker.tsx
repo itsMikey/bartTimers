@@ -1,7 +1,7 @@
 import {cookieParser} from "./CookieParser";
 import {ERROR_CODES} from "../../common/constant/error-codes";
 
-// Not used. Could be used for guest using site
+// Not used currently. Could be used for guest browsing site
 class CookieBaker {
     public setCookie(name: string, value: any) {
         const cookie = [name, "=", JSON.stringify(value), "; domain=.", window.location.host.toString(), "; path=/;"].join("");

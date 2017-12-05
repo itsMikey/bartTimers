@@ -3,10 +3,14 @@ import Notification from "react-web-notification";
 
 interface IWebNotification {
     title: string;
-    tag: string;
-    body: string;
-    icon?: string;
-    lang?: string;
+    ignore: boolean;
+    options: {
+        tag?: string
+        body: string;
+        icon?: string;
+        lang?: string;
+    };
+    timeout?: number;
 }
 
 class WebNotification extends React.Component<any, any> {
@@ -16,13 +20,14 @@ class WebNotification extends React.Component<any, any> {
             <div>
                 <Notification
                     title={this.props.title}
-                    tag={this.props.tag}
-                    body={this.props.body}
-                    timeout={5000}
+                    options={this.props.options}
+                    timeout={this.props.timeout || 5000}
+                    ignore={this.props.ignore}
                 />
             </div>
         );
     }
-};
+}
+
 
 export default WebNotification;

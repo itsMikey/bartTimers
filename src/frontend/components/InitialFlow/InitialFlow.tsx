@@ -1,9 +1,11 @@
+// InitialFlow shows tabs to either register or login
 import * as React from "React";
 import {connect} from "react-redux";
 import Register from "../Register/Register";
 import Login from "../Login/Login";
+import {IState} from "../../../common/constant/interfaces/state/IState";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IState) => ({
     ...state
 });
 

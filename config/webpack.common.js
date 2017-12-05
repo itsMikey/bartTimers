@@ -4,7 +4,6 @@ const fs = require('fs');
 const merge = require('webpack-merge');
 const path = require('path');
 const LoaderOptionsPlugin = require("webpack/lib/LoaderOptionsPlugin");
-// const DefinePlugin = require('webpack/lib/DefinePlugin');
 
 const environmentName = process.env.NODE_ENV || "local";
 

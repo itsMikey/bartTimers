@@ -13,6 +13,7 @@ import {mockApiBartStations} from "../../../../../test-helpers/BartObjectsMocker
 import {BartStation, IBartStation} from "../../../../models/BartStation/BartStation";
 import {mongooseHelper} from "../../../../../test-helpers/MongooseHelper";
 import {IRegisterApiReq} from "../../../../common/api/register/IRegisterApiReq";
+import {IStations} from "../../../../common/constant/interfaces/bart/Station/IStations";
 
 describe("Frontend User Methods", () => {
     const TEST_URL: string = "http://localhost:4000/";
@@ -186,7 +187,7 @@ describe("Frontend User Methods", () => {
             homeStationArrival: undefined,
             destinationArrival: undefined,
             destinationStation: undefined
-        };
+        } as IStations;
         expect(userMethods.userHasSettings(settings), "didn't correctly check user settings object 1").to.eql(false);
         settings.homeStation = globalStations[0];
         expect(userMethods.userHasSettings(settings), "didn't correctly check user settings object 2").to.eql(false);

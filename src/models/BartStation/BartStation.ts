@@ -36,6 +36,7 @@ const schema: Schema = new Schema({
 schema.statics.addStations = (bartStations: IApiBartStation[]): Promise<string> => {
     let bulk = BartStation.collection.initializeUnorderedBulkOp();
 
+    // for each station upsert/update
     for (let i = 0; i < bartStations.length; i++) {
         bulk.find({
             abbr: bartStations[i].abbr
@@ -62,7 +63,7 @@ schema.statics.addStations = (bartStations: IApiBartStation[]): Promise<string> 
         });
 };
 
-// all stations in mongo DB (not user)
+// all stations in mongo DB
 schema.statics.getAllStations = (): Promise<IBartStation[]> => {
     return BartStation.find({}).exec();
 };

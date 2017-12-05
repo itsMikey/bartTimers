@@ -13,11 +13,10 @@ export class QueuePublisherHttp implements IQueuePublisher {
     private workerEndPoint: string;
 
     public constructor(@inject(TYPES.AppConfigService) private appConfigService: AppConfigService) {
-        // do something construct...
         this.workerEndPoint = appConfigService.getAppConfig().workerEndPoint;
         this.httpClient = new HttpClient({});
     }
-
+    // post our queue request to worker
     public publish(message: IQueueRequest): Promise<any> {
         const url: string = this.workerEndPoint;
 

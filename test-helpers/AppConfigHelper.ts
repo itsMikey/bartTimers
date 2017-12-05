@@ -1,3 +1,4 @@
+// app config for tests
 import {IAppConfig} from "../src/common/constant/interfaces/app-config/IAppConfig";
 
 const fs = require("fs");

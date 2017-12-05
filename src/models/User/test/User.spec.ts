@@ -7,6 +7,7 @@ import {IApiAddUserStations} from "../../../common/constant/interfaces/bart/Stat
 import {SUCCESS_CODES} from "../../../common/constant/success-codes";
 import {BartStation, IBartStation} from "../../BartStation/BartStation";
 import {mockApiBartStations} from "../../../../test-helpers/BartObjectsMocker";
+import {IStations} from "../../../common/constant/interfaces/bart/Station/IStations";
 
 describe("User", () => {
     const testUser: IRegisterApiReq = userRegistrationMocker();
@@ -115,7 +116,7 @@ describe("User", () => {
                     homeStationArrival: "05:00pm",
                     destinationArrival:  "08:00am",
                     destinationStation: globalStations[5]
-                }
+                } as IStations
             }
         };
         User.addStations(addStationsReq)
@@ -124,7 +125,6 @@ describe("User", () => {
                 // get user to see if actually saved
                 User.findById(globalUser._id)
                     .then((clientUserFacingObj: IUser) => {
-                        console.log(clientUserFacingObj);
                         expect(clientUserFacingObj._id, "make sure got right user").to.eql(globalUser._id);
                         expect(clientUserFacingObj.stations.destinationStation, "incorrect destinationStation").to.eql(addStationsReq.data.stations.destinationStation._id);
                         expect(clientUserFacingObj.stations.destinationArrival, "incorrect destinationArrival").to.eql(addStationsReq.data.stations.destinationArrival);

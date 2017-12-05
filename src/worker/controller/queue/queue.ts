@@ -8,7 +8,9 @@ export interface IQueueController {
     queue(req: Request): Promise<any>;
 }
 
-
+/* Queue router  will use the correct queueRequestHandler Service
+*  Populating bart stations is BartStationQueueHandlerService for example
+* */
 export function QueueControllerFactory(container: Container, queueRouterService: IQueueRouterService) {
 
     @injectable()

@@ -1,17 +1,12 @@
-import {IBartStation} from "../../../models/BartStation/BartStation";
-import {IClientFacingRoutes} from "../../../common/api/route/IClientFacingRoute";
+import {IStateBart} from "../../../common/constant/interfaces/state/IStateBart";
 
-interface IBartState {
-    bartStations: IBartStation[];
-    routes: IClientFacingRoutes[];
-}
 
-const defaultState: IBartState = {
+const defaultState: IStateBart = {
     bartStations: null,
     routes: null
 };
 
-const bartReducer = (state = defaultState, action): IBartState => {
+const bartReducer = (state = defaultState, action): IStateBart => {
     switch (action.type) {
         case "GET_ALL_BART_STATIONS":
             return ({

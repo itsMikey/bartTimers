@@ -1,8 +1,8 @@
+// worker handles queue requests to take load off our main app
 import * as express from "express";
 global.Promise = require("bluebird");
 import bodyParser = require("body-parser");
 import errorHandler = require("errorhandler");
-// import morgan = require("morgan");
 import * as methodOverride from "method-override";
 import {interfaces, InversifyExpressServer, TYPE} from "inversify-express-utils";
 import {container} from "../common/ioc/ioc";
@@ -35,8 +35,6 @@ class Server {
 
     private config() {
         if (!this.appConfigService.getAppConfig().app.isProd) {
-            // let logger = makeLoggerMiddleware();
-            // container.applyMiddleware(logger);
             container.bind<express.RequestHandler>("Morgan").toConstantValue(morgan("dev"));
         } else {
             container.bind<express.RequestHandler>("Morgan").toConstantValue(morgan("combined"));

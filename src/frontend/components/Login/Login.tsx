@@ -1,3 +1,4 @@
+// component to log user in
 import * as React from "react";
 import {connect} from "react-redux";
 import {isValidEmail, isValidPassword} from "../../../common/HelperFunctions";
@@ -5,6 +6,7 @@ import {ERROR_CODES} from "../../../common/constant/error-codes";
 import {userMethods} from "../User/UserMethods";
 import {SUCCESS_CODES} from "../../../common/constant/success-codes";
 import {USER_ACTIONS} from "../../state/actions/UserActions";
+import {IClientUser} from "../../state/reducers/UserReducer";
 
 const mapStateToProps = (state) => ({
     user: {
@@ -17,7 +19,7 @@ const mapStateToProps = (state) => ({
             destinationStation: null
         },
         ...state.user
-    }
+    } as IClientUser
 });
 
 const mapDispatchToProps = (dispatch) => ({

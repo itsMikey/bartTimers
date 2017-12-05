@@ -1,10 +1,10 @@
 import {Document, Model, model, Schema} from "mongoose";
 import {IRegisterApiReq} from "../../common/api/register/IRegisterApiReq";
 import * as bcrypt from "bcryptjs";
-import {IBartStation} from "../BartStation/BartStation";
 import {IApiAddUserStations} from "../../common/constant/interfaces/bart/Station/IApiAddUserStation";
 import {SUCCESS_CODES} from "../../common/constant/success-codes";
 import {ERROR_CODES} from "../../common/constant/error-codes";
+import {IStations} from "../../common/constant/interfaces/bart/Station/IStations";
 const SALT_ROUNDS: number = 12;
 
 export interface IUser extends Document {
@@ -14,12 +14,7 @@ export interface IUser extends Document {
     password: string;
     devices?: Array<{ token: string; name: string, uniqueId: string }>;
     loggedIn?: boolean;
-    stations?: {
-        homeStation: IBartStation,
-        homeStationArrival: string,
-        destinationArrival: string,
-        destinationStation: IBartStation
-    };
+    stations?: IStations;
     created_at: Date;
     updated_at: Date;
     lastLogin: Date;
@@ -85,10 +80,7 @@ schema.statics.register = (registerReq: IRegisterApiReq): Promise<IUser> => {
                             .then((hash) => {
                                 newUser.password = hash;
                                 // save new user
-                                return new User(newUser).save()
-                                    .then((doc) => {
-                                        return resolve(doc);
-                                    });
+                                return resolve(new User(newUser).save());
                             });
                     } else {
                         return reject(ERROR_CODES.REGISTER.EMAIL_EXISTS);
@@ -135,10 +127,7 @@ try {
 }
 
 export function encrypt(password: string): Promise<string> {
-    return bcrypt.hash(password, SALT_ROUNDS)
-        .then((hash) => {
-            return hash;
-        });
+    return bcrypt.hash(password, SALT_ROUNDS);
 }
 
 

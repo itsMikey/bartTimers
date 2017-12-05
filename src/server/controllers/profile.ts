@@ -1,4 +1,4 @@
-import {controller, httpGet, httpPost} from "inversify-express-utils";
+import {controller, httpPost} from "inversify-express-utils";
 import {Container, inject, injectable} from "inversify";
 import {UserService} from "../../service/user/UserService";
 import TYPES from "../../common/constant/types";

@@ -1,12 +1,9 @@
+import {IStations} from "../../../common/constant/interfaces/bart/Station/IStations";
+
 export interface IClientUser {
         loggedIn: boolean;
         devices?: Array<{ token: string; name: string, uniqueId: string }>;
-        stations: {
-            homeStation: string;
-            homeStationArrival: string;
-            destinationArrival: string;
-            destinationStation: string;
-        };
+        stations: IStations;
 }
 
 const defaultState: IClientUser = {

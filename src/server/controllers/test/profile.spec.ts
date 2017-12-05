@@ -102,6 +102,8 @@ describe("Profile Controller", () => {
                     .populate("stations.homeStation stations.destinationStation")
                     .exec()
                     .then((user: IUser) => {
+                        console.log(user.stations.homeStation.location);
+                        console.log(user.stations.destinationStation.location);
                         expect(user.stations.homeStation.abbr, "homeStation was incorrect").to.eql(globalStations[0].abbr);
                         expect(user.stations.homeStationArrival, "homeStationArrival was incorrect").to.eql(addUserStations.body.data.stations.homeStationArrival);
                         expect(user.stations.destinationStation.abbr, "destinationStation was incorrect").to.eql(globalStations[1].abbr);

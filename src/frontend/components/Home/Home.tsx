@@ -6,8 +6,10 @@ import InitialFlow from "../InitialFlow/InitialFlow";
 import Dashboard from "../Dashboard/Dashboard";
 import NavBar from "../../controls/Navbar/NavBar";
 import {USER_ACTIONS} from "../../state/actions/UserActions";
+import {IState} from "../../../common/constant/interfaces/state/IState";
+import {IClientUser} from "../../state/reducers/UserReducer";
 
-const mapStateToProps = (state) => ({
+const mapStateToProps = (state: IState) => ({
     user: {
         loggedIn: false,
         devices: [],
@@ -18,7 +20,7 @@ const mapStateToProps = (state) => ({
             destinationStation: null
         },
         ...state.user
-    }
+    } as IClientUser
 });
 
 const mapDispatchToProps = (dispatch) => ({
@@ -39,6 +41,7 @@ class Home extends React.Component<any, any> {
 
         return (
             <div>
+                {/*show different nav bar depending on if user signed in*/}
                 <NavBar
                     dropDown={this.props.user.loggedIn ?
                         {
